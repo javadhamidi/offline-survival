@@ -25,13 +25,22 @@ public class PlayScreen extends World
 
     public static String story;
     public static String[] prompts;
+    
+    public static void LevelStrip () 
+    {
+        //
+    }
 
     public PlayScreen()
     {     
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
         super(400, 640, 1); 
-
-        System.out.println(storyMapList[1].split("\">")[1]);
+        
+        scene = storyMapList[1].split("name=\"")[1].split("\" tags=")[0];
+        story = storyMapList[1].split("\">")[1].split("\\[\\[")[0];
+        prompts = storyMapList[1].split("\">")[1].split("\\[\\[")[1].split("</tw-passagedata>");
+        System.out.println();
+        
         prepare();
     }
 
