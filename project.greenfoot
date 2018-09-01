@@ -1,8 +1,9 @@
 #Greenfoot properties
-#Sat Sep 01 15:09:03 ACST 2018
+#Sat Sep 01 15:52:07 ACST 2018
 target4.type=ClassTarget
 dependency3.from=Prompt
 target3.height=50
+class.PlayButton.image=home_play_button.png
 target5.height=50
 readme.y=10
 dependency3.type=UsesDependency
@@ -42,8 +43,8 @@ package.numTargets=5
 target1.type=ClassTarget
 target1.typeParameters=
 target2.height=50
-target5.y=0
 target4.height=50
+target5.y=0
 target5.x=0
 target1.name=PlayScreen
 target4.y=0
@@ -74,10 +75,10 @@ class.MainMenu.image=home_background.png
 dependency2.from=PlayScreen
 dependency2.type=UsesDependency
 target5.typeParameters=
-world.lastInstantiated=PlayScreen
-mainWindow.height=784
+world.lastInstantiated=MainMenu
 target2.showInterface=false
+mainWindow.height=784
 target3.name=PlayButton
-project.charset=UTF-8
 target3.width=80
+project.charset=UTF-8
 target4.showInterface=false
