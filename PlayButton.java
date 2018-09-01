@@ -20,12 +20,14 @@ public class PlayButton extends Actor
         {
             PlayScreen ps = new PlayScreen();
             Greenfoot.setWorld(ps);
+            Greenfoot.playSound("Button Release.wav");
         }
         
         if (Greenfoot.mousePressed(this)) 
         {
             GreenfootImage scr = new GreenfootImage("home_play_button_pressed.png");
             setImage(scr);
+            Greenfoot.playSound("Button Press.wav");
         }
     }    
 }

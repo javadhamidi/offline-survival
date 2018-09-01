@@ -12,6 +12,7 @@ public class Health extends Actor
 
     public Health()
     {
+        health = 0;
         changeHealth (100);
     } 
     
@@ -19,9 +20,8 @@ public class Health extends Actor
     {
         health += change;
         
-        if (health < 1) {
-            health = 0;
-        }
+        if (health < 1) { health = 0; }
+        if (health < 99) { health = 100; }
         
         GreenfootImage scr = new GreenfootImage(Integer.toString(health) + "%",20,new Color(110,health*2,20),new Color(0,0,0,0));
         setImage(scr);

@@ -42,20 +42,20 @@ public class PlayScreen extends World
         
         scene = storyMapList[1].split("name=\"")[1].split("\" tags=")[0];
         
-        //System.out.println(storyMap.get(0));
+        System.out.println(storyMap.get(1));
         
         prepare();
     }
 
-    public String[] mapPassages(String passage) 
+    public List<Object> mapPassages(String passage) 
     {
-        String PID = passage.split("\" name=\"")[0];
-        String NAME = passage.split("name=")[1].split("tags=")[0];
-        String TAGS = passage.split("tags=")[1].split("position=")[0];
-        String POSITION = passage.split("position=")[1].split("size=")[0];
-        String SIZE = passage.split("size=")[1].split(">")[0];
-        String TEXT = passage.split("\">")[1].split("\\[\\[")[0].replace("&#39;","'");
-        String[] map = {PID, NAME, TAGS, POSITION, SIZE, TEXT};
+        List<Object> map = new ArrayList<Object>();
+        map.add(passage.split("\" name=\"")[0]);
+        map.add(passage.split("name=")[1].split("tags=")[0]);
+        map.add(passage.split("tags=")[1].split("position=")[0]);
+        map.add(passage.split("position=")[1].split("size=")[0]);
+        map.add(passage.split("size=")[1].split(">")[0]);
+        map.add(passage.split("\">")[1].split("\\[\\[")[0].replace("&#39;","'"));
         return map;
     }
     
