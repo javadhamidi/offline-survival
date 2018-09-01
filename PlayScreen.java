@@ -42,7 +42,7 @@ public class PlayScreen extends World
         
         scene = storyMapList[1].split("name=\"")[1].split("\" tags=")[0];
         
-        System.out.println(storyMap.get(1));
+        System.out.println(storyMap.get(2));
         
         prepare();
     }
@@ -56,6 +56,7 @@ public class PlayScreen extends World
         map.add(passage.split("position=")[1].split("size=")[0]);
         map.add(passage.split("size=")[1].split(">")[0]);
         map.add(passage.split("\">")[1].split("\\[\\[")[0].replace("&#39;","'"));
+        map.add("[[" + passage.split("\\[\\[", 2)[1].split("</tw-passagedata>")[0]);
         return map;
     }
     
