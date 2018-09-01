@@ -1,0 +1,38 @@
+import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+
+/**
+ * Write a description of class Prompt here.
+ * 
+ * @author (your name) 
+ * @version (a version number or a date)
+ */
+public class Prompt extends Actor
+{
+    private static String[] prompts;
+    private static String clickDestination;
+    
+    void PromptPrepare(String prompt)
+    {
+        prompts = prompt.split("\">")[1].split("\\[\\[")[1].split("</tw-passagedata>");
+        clickDestination = prompts[0].split("-&gt;")[1];
+        
+        GreenfootImage scr = new GreenfootImage(prompts[0],20,Color.BLUE,new Color(0,0,0,0));
+        setImage(scr);
+    }
+    
+    public Prompt()
+    {
+        PromptPrepare(storyMap[1]); 
+    }
+    
+    /**
+     * Act - do whatever the Prompt wants to do. This method is called whenever
+     * the 'Act' or 'Run' button gets pressed in the environment.
+     */
+    public void act() 
+    {
+        if (Greenfoot.mouseClicked(this)) {
+            //
+        }
+    }    
+}

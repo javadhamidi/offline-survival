@@ -8,7 +8,8 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class MainMenu extends World
 {
-
+    GreenfootSound music = new GreenfootSound("Marimba Boy.wav");
+    
     /**
      * Constructor for objects of class MainMenu.
      * 
@@ -17,5 +18,15 @@ public class MainMenu extends World
     {    
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
         super(400, 640, 1); 
+    }
+    
+    public void started()
+    {
+        music.playLoop();
+    }
+    
+    public void stopped()
+    {
+        music.stop();
     }
 }
