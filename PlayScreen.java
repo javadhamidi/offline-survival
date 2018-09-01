@@ -40,7 +40,7 @@ public class PlayScreen extends World
         
         scene = storyMapList[1].split("name=\"")[1].split("\" tags=")[0];
         
-        System.out.println(storyMap.get(0));
+        //System.out.println(storyMap.get(0));
         
         prepare();
     }
@@ -65,6 +65,9 @@ public class PlayScreen extends World
     {
         Story story = new Story();
         addObject(story,200,270);
+        
+        Health health = new Health();
+        addObject(health,340,45);
         
         createPrompts();
     }
