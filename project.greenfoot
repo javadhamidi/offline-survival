@@ -1,5 +1,5 @@
 #Greenfoot properties
-#Sat Sep 01 17:15:41 ACST 2018
+#Sat Sep 01 20:02:02 ACST 2018
 target4.type=ClassTarget
 dependency3.from=Prompt
 target3.height=50
@@ -22,6 +22,7 @@ mainWindow.width=1382
 dependency4.type=UsesDependency
 target2.width=80
 target5.name=MainMenu
+class.Inventory.superclass=greenfoot.Actor
 version=3.0.0
 dependency1.to=Prompt
 class.PlayScreen.image=game_background.png
@@ -82,7 +83,7 @@ target4.width=80
 dependency2.from=PlayScreen
 dependency2.type=UsesDependency
 target5.typeParameters=
-world.lastInstantiated=MainMenu
+world.lastInstantiated=PlayScreen
 target2.showInterface=false
 mainWindow.height=784
 target3.name=PlayButton

@@ -22,7 +22,9 @@ public class PlayScreen extends World
 
     public static String round;
     public static String scene;
+    public static Health health;
     
+    public static Health getHealthIndicator() { return health; }
     
     public PlayScreen()
     {     
@@ -66,8 +68,14 @@ public class PlayScreen extends World
         Story story = new Story();
         addObject(story,200,270);
         
-        Health health = new Health();
+        health = new Health();
         addObject(health,340,45);
+        
+        Inventory water = new Inventory("inventory_water.png", 10);
+        addObject(water,50,600);
+        
+        Inventory food = new Inventory("inventory_food.png", 10);
+        addObject(food,125,600);
         
         createPrompts();
     }
