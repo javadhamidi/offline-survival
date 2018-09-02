@@ -12,10 +12,6 @@ public class Story extends Actor
     
     public static void ChangeStory() 
     {
-        //story = text.split("\">")[1].split("\\[\\[")[0].replace("&#39;","'");
-        //story = PlayScreen.currentScene[6];
-        //System.out.println(story);
-        //?
         story = String.valueOf(PlayScreen.currentScene.get(5));
     }
     

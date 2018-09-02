@@ -15,12 +15,8 @@ public class PlayScreen extends World
      * Constructor for objects of class PlayScreen.
      * 
      */
-    
-    // phase out this system
-    //public static String[] storyMapList;
-    
     public static List<List<Object>> storyMap = new ArrayList<List<Object>>();
-
+    
     public static int currentRound;
     public static List<Object> currentScene;
     
@@ -49,11 +45,16 @@ public class PlayScreen extends World
         prepare();
     }
 
-    private void setScene(int scene)
+    public void setScene(int scene)
     {
+        removeObjects(getObjects(Prompt.class));
+        
         scene -= 1;
         currentRound = scene;
         currentScene = storyMap.get(currentRound);
+        
+        createPrompts();
+        Story.ChangeStory();
     }
     
     public List<Object> mapPassages(String passage) 
@@ -93,13 +94,9 @@ public class PlayScreen extends World
     public void createPrompts()
     {
         prompts = String.valueOf(PlayScreen.currentScene.get(6)).replace("[[", "").split("\\]\\]");
-        
 
         for (int i = 0; i <= prompts.length - 1; ++i) {
-           // System.out.println(prompts[i]);
            addObject(new Prompt(prompts[i]),200,400+i*50);
         } 
-        //Prompt prompt = new Prompt();
-        //addObject(prompt,200,450);
     }
 }

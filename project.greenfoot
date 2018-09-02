@@ -1,5 +1,5 @@
 #Greenfoot properties
-#Sun Sep 02 16:54:00 ACST 2018
+#Sun Sep 02 21:54:35 ACST 2018
 dependency9.type=UsesDependency
 target4.type=ClassTarget
 dependency3.from=PlayScreen
@@ -109,7 +109,7 @@ class.MainMenu.image=home_background.png
 dependency2.from=PlayScreen
 dependency2.type=UsesDependency
 target5.typeParameters=
-world.lastInstantiated=PlayScreen
+world.lastInstantiated=MainMenu
 target2.showInterface=false
 mainWindow.height=784
 dependency11.from=Inventory

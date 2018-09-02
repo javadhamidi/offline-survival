@@ -10,33 +10,24 @@ public class Prompt extends Actor
 {
     private String prompt;
     private String destination;
-    
-    void PromptPrepare()
-    {
-        //prompts = prompt.split("\">")[1].split("\\[\\[")[1].split("-&gt;")[0].split("</tw-passagedata>");
-        //System.out.println(prompts[0]);
-        //destination = Integer.parseInt(prompts[0].split("~")[1]);
-        
-        //prompts = String.valueOf(PlayScreen.currentScene.get(6)).replace("[[", "").split("\\]\\]");
-        
-        
-        //currentScene = currentSceneString.substring(1, currentSceneString.length()-1).split(",");
-        
-        //GreenfootImage scr = new GreenfootImage(prompts[0].split("-&gt;")[0],20,Color.BLUE,new Color(0,0,0,0));
-        //setImage(scr);
-    }
+    private int destinationPid;
     
     public Prompt(String promptDetails)
     {
         prompt = promptDetails.split("-&gt;")[0];
         destination = promptDetails.split("-&gt;")[1];
         
+        for (int i = 0; i <= PlayScreen.storyMap.size() - 1; ++i) {
+            if (PlayScreen.storyMap.get(i).get(1) == destination) {
+                destinationPid = Integer.valueOf((String)PlayScreen.storyMap.get(i).get(0));
+                break;
+            }
+        }
+        
+        // need to convert destination name into PID
+        
         GreenfootImage scr = new GreenfootImage(prompt,20,Color.BLUE,new Color(0,0,0,0));
         setImage(scr);
-        
-        //PromptPrepare();
-        //PromptPrepare(PlayScreen.storyMapList[scene]);
-        //System.out.println(PlayScreen.storyMapList[scene]);
     }
 
     /**
@@ -45,14 +36,9 @@ public class Prompt extends Actor
      */
     public void act() 
     {
-        //GreenfootImage scr = new GreenfootImage(prompts[0]);
-        
-        
-        //GreenfootImage scr = new GreenfootImage(prompts[0].split("~")[0],20,Color.BLUE,new Color(0,0,0,0));
-        
-        /*if (Greenfoot.mouseClicked(this)) {
-            PromptPrepare(PlayScreen.storyMapList[destination]);
-            Story.ChangeStory(PlayScreen.storyMapList[destination]);
-        }*/
+        if (Greenfoot.mouseClicked(this)) {
+            //fix!!!
+            //((PlayScreen)getWorld()).setScene(1);
+        }
     }    
 }
