@@ -17,7 +17,7 @@ public class Inventory extends Actor
         GreenfootImage scr = new GreenfootImage(item);
         setImage(scr);
         
-        GreenfootImage text = new GreenfootImage("+" + Integer.toString(value), 17, Color.GRAY, new Color(0,0,0,0));
+        GreenfootImage text = new GreenfootImage(((value > 0) ? "+" + Integer.toString(value) : Integer.toString(value)), 17, Color.GRAY, new Color(0,0,0,0));
         scr.drawImage(text, 0, 34);
     }    
     
@@ -29,7 +29,7 @@ public class Inventory extends Actor
     {
         if (Greenfoot.mousePressed(this)) 
         {
-            Health.health += value;
+            ((PlayScreen)getWorld()).health.changeHealth(value);
             Greenfoot.playSound("Item Pickup.wav");
             getWorld().removeObject(this);
         }

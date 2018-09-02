@@ -38,7 +38,7 @@ public class Prompt extends Actor
     {
         if (Greenfoot.mouseClicked(this)) {
             //fix!!!
-            //((PlayScreen)getWorld()).setScene(1);
+            ((PlayScreen)getWorld()).setScene(1);
         }
     }    
 }

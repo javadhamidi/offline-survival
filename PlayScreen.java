@@ -54,6 +54,7 @@ public class PlayScreen extends World
         currentScene = storyMap.get(currentRound);
         
         createPrompts();
+        Title.title = ((String)PlayScreen.storyMap.get(currentRound).get(1)).replace("\"","");
         Story.ChangeStory();
     }
     
@@ -87,6 +88,9 @@ public class PlayScreen extends World
         
         Inventory food = new Inventory("inventory_food.png", 10);
         addObject(food,125,600);
+        
+        Title title = new Title();
+        addObject(title,140,45);
         
         createPrompts();
     }
