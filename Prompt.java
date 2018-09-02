@@ -8,23 +8,33 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Prompt extends Actor
 {
-    private static String[] prompts;
-    //private static int destination;
+    private String prompt;
+    private String destination;
     
-    void PromptPrepare(String prompt)
+    void PromptPrepare()
     {
-        prompts = prompt.split("\">")[1].split("\\[\\[")[1].split("-&gt;")[0].split("</tw-passagedata>");
-        System.out.println(prompts[0]);
+        //prompts = prompt.split("\">")[1].split("\\[\\[")[1].split("-&gt;")[0].split("</tw-passagedata>");
+        //System.out.println(prompts[0]);
         //destination = Integer.parseInt(prompts[0].split("~")[1]);
         
-        GreenfootImage scr = new GreenfootImage(prompts[0]);
+        //prompts = String.valueOf(PlayScreen.currentScene.get(6)).replace("[[", "").split("\\]\\]");
         
-        //GreenfootImage scr = new GreenfootImage(prompts[0].split("~")[0],20,Color.BLUE,new Color(0,0,0,0));
-        setImage(scr);
+        
+        //currentScene = currentSceneString.substring(1, currentSceneString.length()-1).split(",");
+        
+        //GreenfootImage scr = new GreenfootImage(prompts[0].split("-&gt;")[0],20,Color.BLUE,new Color(0,0,0,0));
+        //setImage(scr);
     }
     
-    public Prompt(int scene)
+    public Prompt(String promptDetails)
     {
+        prompt = promptDetails.split("-&gt;")[0];
+        destination = promptDetails.split("-&gt;")[1];
+        
+        GreenfootImage scr = new GreenfootImage(prompt,20,Color.BLUE,new Color(0,0,0,0));
+        setImage(scr);
+        
+        //PromptPrepare();
         //PromptPrepare(PlayScreen.storyMapList[scene]);
         //System.out.println(PlayScreen.storyMapList[scene]);
     }
@@ -35,6 +45,11 @@ public class Prompt extends Actor
      */
     public void act() 
     {
+        //GreenfootImage scr = new GreenfootImage(prompts[0]);
+        
+        
+        //GreenfootImage scr = new GreenfootImage(prompts[0].split("~")[0],20,Color.BLUE,new Color(0,0,0,0));
+        
         /*if (Greenfoot.mouseClicked(this)) {
             PromptPrepare(PlayScreen.storyMapList[destination]);
             Story.ChangeStory(PlayScreen.storyMapList[destination]);

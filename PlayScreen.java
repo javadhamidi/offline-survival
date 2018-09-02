@@ -17,7 +17,7 @@ public class PlayScreen extends World
      */
     
     // phase out this system
-    public static String[] storyMapList;
+    //public static String[] storyMapList;
     
     public static List<List<Object>> storyMap = new ArrayList<List<Object>>();
 
@@ -25,6 +25,8 @@ public class PlayScreen extends World
     public static List<Object> currentScene;
     
     public static Health health;
+    
+    private static String[] prompts;
     
     public PlayScreen()
     {     
@@ -34,15 +36,15 @@ public class PlayScreen extends World
         InputStream storyMapDoc = getClass().getClassLoader().getResourceAsStream("story/test.html");
         java.util.Scanner storyMapStream = new java.util.Scanner(storyMapDoc).useDelimiter("\\A");
         String storyMapScanner = storyMapStream.next();
-        storyMapList = storyMapScanner.split("pid=\"");
+        String[] storyMapList = storyMapScanner.split("pid=\"");
         
         for (int i = 1; i <= storyMapList.length - 1; ++i) {
             storyMap.add(mapPassages(storyMapList[i]));
         }
         
-        setScene(1);
+        setScene(3);
         
-        System.out.println(storyMap.get(2).get(0));
+        //System.out.println(storyMap.get(2).get(0));
         
         prepare();
     }
@@ -52,12 +54,6 @@ public class PlayScreen extends World
         scene -= 1;
         currentRound = scene;
         currentScene = storyMap.get(currentRound);
-        //Object[] row = (Object[]) currentSceneString.get(currentSceneString);
-        //currentScene = Arrays.toString(currentSceneString);
-        //Object[] row = (Object[]) currentSceneString.get(currentRound);
-        //List<UserDto> currentScene = cast(currentSceneString);
-        //currentScene = currentSceneString.substring(1, currentSceneString.length()-1).split(",");
-        //System.out.println(currentScene);
     }
     
     public List<Object> mapPassages(String passage) 
@@ -96,14 +92,14 @@ public class PlayScreen extends World
     
     public void createPrompts()
     {
+        prompts = String.valueOf(PlayScreen.currentScene.get(6)).replace("[[", "").split("\\]\\]");
         
-        
-        /*
-        for (int i = 1; i < storyMapList.length; i++)
-        {
-            Prompt prompt = new Prompt(i);
-            addObject(prompt,200,450);
-        }
-        */
+
+        for (int i = 0; i <= prompts.length - 1; ++i) {
+           // System.out.println(prompts[i]);
+           addObject(new Prompt(prompts[i]),200,400+i*50);
+        } 
+        //Prompt prompt = new Prompt();
+        //addObject(prompt,200,450);
     }
 }

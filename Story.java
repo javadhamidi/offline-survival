@@ -10,7 +10,7 @@ public class Story extends Actor
 {
     public static String story;
     
-    public static void ChangeStory(String text) 
+    public static void ChangeStory() 
     {
         //story = text.split("\">")[1].split("\\[\\[")[0].replace("&#39;","'");
         //story = PlayScreen.currentScene[6];
@@ -21,7 +21,7 @@ public class Story extends Actor
     
     public Story()
     {
-        ChangeStory(PlayScreen.storyMapList[1]);
+        ChangeStory();
     } 
     
     // don't like using act
