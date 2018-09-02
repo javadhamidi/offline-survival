@@ -25,7 +25,7 @@ public class Prompt extends Actor
     
     public Prompt(int scene)
     {
-        PromptPrepare(PlayScreen.storyMapList[scene]);
+        //PromptPrepare(PlayScreen.storyMapList[scene]);
         //System.out.println(PlayScreen.storyMapList[scene]);
     }
 

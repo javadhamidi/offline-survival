@@ -16,15 +16,15 @@ public class PlayScreen extends World
      * 
      */
     
+    // phase out this system
     public static String[] storyMapList;
     
-    public static List<Object> storyMap = new ArrayList<Object>();
+    public static List<List<Object>> storyMap = new ArrayList<List<Object>>();
 
-    public static String round;
-    public static String scene;
-    public static Health health;
+    public static int currentRound;
+    public static List<Object> currentScene;
     
-    public static Health getHealthIndicator() { return health; }
+    public static Health health;
     
     public PlayScreen()
     {     
@@ -40,13 +40,26 @@ public class PlayScreen extends World
             storyMap.add(mapPassages(storyMapList[i]));
         }
         
-        scene = storyMapList[1].split("name=\"")[1].split("\" tags=")[0];
+        setScene(1);
         
-        System.out.println(storyMap.get(2));
+        System.out.println(storyMap.get(2).get(0));
         
         prepare();
     }
 
+    private void setScene(int scene)
+    {
+        scene -= 1;
+        currentRound = scene;
+        currentScene = storyMap.get(currentRound);
+        //Object[] row = (Object[]) currentSceneString.get(currentSceneString);
+        //currentScene = Arrays.toString(currentSceneString);
+        //Object[] row = (Object[]) currentSceneString.get(currentRound);
+        //List<UserDto> currentScene = cast(currentSceneString);
+        //currentScene = currentSceneString.substring(1, currentSceneString.length()-1).split(",");
+        //System.out.println(currentScene);
+    }
+    
     public List<Object> mapPassages(String passage) 
     {
         List<Object> map = new ArrayList<Object>();
