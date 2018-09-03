@@ -14,20 +14,21 @@ public class Prompt extends Actor
     
     public Prompt(String promptDetails)
     {
-        prompt = promptDetails.split("-&gt;")[0];
-        destination = promptDetails.split("-&gt;")[1];
+        if (promptDetails.contains("-&gt;")) 
+        {
+            prompt = promptDetails.split("-&gt;")[0];
+            destination = promptDetails.split("-&gt;")[1];
         
-        for (int i = 0; i <= PlayScreen.storyMap.size() - 1; ++i) {
-            if (PlayScreen.storyMap.get(i).get(1) == destination) {
-                destinationPid = Integer.valueOf((String)PlayScreen.storyMap.get(i).get(0));
-                break;
+            for (int i = 0; i < PlayScreen.mapLength; ++i) {
+                if (((String)PlayScreen.storyMap.get(i).get(1)).replace("\"", "").contains(destination)) {
+                    destinationPid = Integer.valueOf((String)PlayScreen.storyMap.get(i).get(0));
+                    break;
+                }
             }
+            
+            GreenfootImage scr = new GreenfootImage(prompt,20,Color.BLUE,new Color(0,0,0,0));
+            setImage(scr);
         }
-        
-        // need to convert destination name into PID
-        
-        GreenfootImage scr = new GreenfootImage(prompt,20,Color.BLUE,new Color(0,0,0,0));
-        setImage(scr);
     }
 
     /**
@@ -37,8 +38,9 @@ public class Prompt extends Actor
     public void act() 
     {
         if (Greenfoot.mouseClicked(this)) {
-            //fix!!!
-            ((PlayScreen)getWorld()).setScene(1);
+            //System.out.println(destinationPid);
+            ((PlayScreen)getWorld()).setScene(destinationPid);
+            Greenfoot.playSound("Mouse Click.wav");
         }
     }    
 }

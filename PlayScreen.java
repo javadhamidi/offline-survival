@@ -16,13 +16,13 @@ public class PlayScreen extends World
      * 
      */
     public static List<List<Object>> storyMap = new ArrayList<List<Object>>();
-    
+    public static int mapLength;
     public static int currentRound;
     public static List<Object> currentScene;
     
     public static Health health;
     
-    private static String[] prompts;
+    //private static String[] prompts;
     
     public PlayScreen()
     {     
@@ -33,8 +33,9 @@ public class PlayScreen extends World
         java.util.Scanner storyMapStream = new java.util.Scanner(storyMapDoc).useDelimiter("\\A");
         String storyMapScanner = storyMapStream.next();
         String[] storyMapList = storyMapScanner.split("pid=\"");
+        mapLength = storyMapList.length - 1;
         
-        for (int i = 1; i <= storyMapList.length - 1; ++i) {
+        for (int i = 1; i <= mapLength; ++i) {
             storyMap.add(mapPassages(storyMapList[i]));
         }
         
@@ -68,6 +69,7 @@ public class PlayScreen extends World
         map.add(passage.split("size=")[1].split(">")[0]);
         map.add(passage.split("\">")[1].split("\\[\\[")[0].replace("&#39;","'"));
         map.add("[[" + passage.split("\\[\\[", 2)[1].split("</tw-passagedata>")[0]);
+        System.out.println("[[" + passage.split("\\[\\[", 2)[1].split("</tw-passagedata>")[0]);
         return map;
     }
     
@@ -97,10 +99,13 @@ public class PlayScreen extends World
     
     public void createPrompts()
     {
-        prompts = String.valueOf(PlayScreen.currentScene.get(6)).replace("[[", "").split("\\]\\]");
-
+        String[] prompts = String.valueOf(PlayScreen.currentScene.get(6)).split("\\]\\]");
+        
         for (int i = 0; i <= prompts.length - 1; ++i) {
-           addObject(new Prompt(prompts[i]),200,400+i*50);
+
+        if (prompts[i].contains("[")) {
+            addObject(new Prompt(prompts[i].replace("[", "")),200,400+i*50);
         } 
     }
+   }
 }
