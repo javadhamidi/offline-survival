@@ -18,6 +18,13 @@ public class MainMenu extends World
     {    
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
         super(400, 640, 1); 
+        
+        if (PlayScreen.isWebMode == false)
+        {
+            GreenfootImage text = new GreenfootImage(" Connection could not be established ", 15, Color.GRAY, new Color(0,0,0,100));
+            getBackground().drawImage(text, 180, 620);
+        }
+        
         prepare();
     }
 

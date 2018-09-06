@@ -2,6 +2,9 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import java.io.InputStream;
 import java.util.List;
 import java.util.ArrayList;
+import java.net.URL;
+import java.net.URLConnection;
+import java.io.IOException;
 
 /**
  * Write a description of class PlayScreen here.
@@ -22,6 +25,8 @@ public class PlayScreen extends World
     
     public static Health health;
     
+    public static boolean isWebMode;
+    
     //private static String[] prompts;
     
     public PlayScreen()
@@ -29,34 +34,68 @@ public class PlayScreen extends World
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
         super(400, 640, 1); 
         
-        InputStream storyMapDoc = getClass().getClassLoader().getResourceAsStream("story/test.html");
-        java.util.Scanner storyMapStream = new java.util.Scanner(storyMapDoc).useDelimiter("\\A");
-        String storyMapScanner = storyMapStream.next();
-        String[] storyMapList = storyMapScanner.split("pid=\"");
-        mapLength = storyMapList.length - 1;
+        //webMode();
         
-        for (int i = 1; i <= mapLength; ++i) {
-            storyMap.add(mapPassages(storyMapList[i]));
+        if (isWebMode == false) {
+            InputStream storyMapDoc = getClass().getClassLoader().getResourceAsStream("story/test.html");
+            java.util.Scanner storyMapStream = new java.util.Scanner(storyMapDoc).useDelimiter("\\A");
+            String storyMapScanner = storyMapStream.next();
+            String[] storyMapList = storyMapScanner.split("pid=\"");
+            mapLength = storyMapList.length - 1;
+           
+            for (int i = 1; i <= mapLength; ++i) {
+                storyMap.add(mapPassages(storyMapList[i]));
+            }
         }
-        
-        setScene(3);
+
+        setScene(2);
         
         //System.out.println(storyMap.get(2).get(0));
-        
+
         prepare();
     }
 
+    private InputStream webMode()
+    {
+        try {
+            URL url = new URL("https://prhps.github.io/twine-repo/Offline%20Survival.html");
+    
+            // Get the input stream through web connection
+            URLConnection connection = url.openConnection();
+            InputStream input = connection.getInputStream();
+    
+            java.util.Scanner storyMapStream = new java.util.Scanner(input).useDelimiter("\\A");
+            String storyMapScanner = storyMapStream.next();
+            
+            if (storyMapScanner.contains("ifid=\"AD13D101-1603-4C5C-8F57-DD0D389F8F94\""))
+            {
+                //System.out.println(storyMapScanner);
+                String[] storyMapList = storyMapScanner.split("pid=\"");
+                mapLength = storyMapList.length - 1;
+                isWebMode = true;
+            } 
+            
+            else { isWebMode = false; }
+            
+            return input;
+        
+        } catch (Exception IOException) {
+            isWebMode = false;
+            return null;
+        }
+    }
+    
     public void setScene(int scene)
     {
         removeObjects(getObjects(Prompt.class));
-        
-        scene -= 1;
-        currentRound = scene;
-        currentScene = storyMap.get(currentRound);
-        
-        createPrompts();
-        Title.title = ((String)PlayScreen.storyMap.get(currentRound).get(1)).replace("\"","");
-        Story.ChangeStory();
+            
+            scene -= 1;
+            currentRound = scene;
+            currentScene = storyMap.get(currentRound);
+            
+            createPrompts();
+            Title.title = ((String)PlayScreen.storyMap.get(currentRound).get(1)).replace("\"","");
+            Story.ChangeStory();
     }
     
     public List<Object> mapPassages(String passage) 
@@ -69,7 +108,6 @@ public class PlayScreen extends World
         map.add(passage.split("size=")[1].split(">")[0]);
         map.add(passage.split("\">")[1].split("\\[\\[")[0].replace("&#39;","'"));
         map.add("[[" + passage.split("\\[\\[", 2)[1].split("</tw-passagedata>")[0]);
-        System.out.println("[[" + passage.split("\\[\\[", 2)[1].split("</tw-passagedata>")[0]);
         return map;
     }
     
@@ -88,7 +126,7 @@ public class PlayScreen extends World
         Inventory water = new Inventory("inventory_water.png", 10);
         addObject(water,50,600);
         
-        Inventory food = new Inventory("inventory_food.png", 10);
+        Inventory food = new Inventory("inventory_food.png", -50);
         addObject(food,125,600);
         
         Title title = new Title();
@@ -102,10 +140,9 @@ public class PlayScreen extends World
         String[] prompts = String.valueOf(PlayScreen.currentScene.get(6)).split("\\]\\]");
         
         for (int i = 0; i <= prompts.length - 1; ++i) {
-
-        if (prompts[i].contains("[")) {
-            addObject(new Prompt(prompts[i].replace("[", "")),200,400+i*50);
-        } 
-    }
+            if (prompts[i].contains("[")) {
+                addObject(new Prompt(prompts[i].replace("[", "")),200,400+i*50);
+            } 
+        }
    }
 }

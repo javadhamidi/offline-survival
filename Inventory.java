@@ -14,11 +14,11 @@ public class Inventory extends Actor
     {
         value = val; 
         
-        GreenfootImage scr = new GreenfootImage(item);
-        setImage(scr);
+        GreenfootImage icon = new GreenfootImage(item);
+        setImage(icon);
         
         GreenfootImage text = new GreenfootImage(((value > 0) ? "+" + Integer.toString(value) : Integer.toString(value)), 17, Color.GRAY, new Color(0,0,0,0));
-        scr.drawImage(text, 0, 34);
+        icon.drawImage(text, 0, 34);
     }    
     
     /**
