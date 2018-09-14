@@ -8,23 +8,29 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Title extends Actor
 {
-    public String mainTitle = "asdfasdf";
+    public String mainTitle = "";
     public static String title;
     
     // don't like using act
     public void act()
     {
-        GreenfootImage subheading = new GreenfootImage(title,20,Color.GRAY,new Color(0,0,0,0));
+
+        if (title.contains("Day") && title.contains(":"))
+        {
+            String dayTitle = title;
+            title = dayTitle.split(":")[1];
+            mainTitle = dayTitle.split(":")[0] + ":";
+        }
+        GreenfootImage subheading = new GreenfootImage("\n" + title,20,Color.GRAY,new Color(0,0,0,0));
         setImage(subheading);
         
-        /*
-        GreenfootImage heading = new GreenfootImage(mainTitle,20,Color.GRAY,new Color(0,0,0,0));
-        heading.drawImage(heading, 50, 50);
+        GreenfootImage heading = new GreenfootImage(mainTitle, 20,Color.GRAY,new Color(0,0,0,0));
+        subheading.drawImage(heading, 0, 0);
         
-        if (title.contains("Day"))
-        {
-            mainTitle = title;
-        }
-        */
+        
+        
+        
+        
+        
     }
 }

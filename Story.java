@@ -13,6 +13,14 @@ public class Story extends Actor
     public static void ChangeStory() 
     {
         story = String.valueOf(PlayScreen.currentScene.get(5));
+        
+        int rowLength = story.split("").length / 38;
+        String[] splitStory = story.split(" ");
+        
+        for (int i = 0; i >= rowLength; i++) 
+        {
+            //
+        }
     }
     
     public Story()

@@ -16,14 +16,16 @@ public class Health extends Actor
         changeHealth (100);
     } 
     
-    public void changeHealth (int change) 
+    public static void changeHealth (int change) 
     {
         health += change;
         
         if (health < 1) { health = 0; }
         if (health > 99) { health = 100; }
-        
-        GreenfootImage scr = new GreenfootImage(Integer.toString(health) + "%",20,new Color(110,health*2,20),new Color(0,0,0,0));
+    }
+    
+    public void act() {
+        GreenfootImage scr = new GreenfootImage(Integer.toString(health) + "%",20,new Color(130,health*2,50),new Color(0,0,0,0));
         setImage(scr);
     }
 }

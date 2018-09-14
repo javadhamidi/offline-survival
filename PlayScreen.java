@@ -37,7 +37,7 @@ public class PlayScreen extends World
         //webMode();
         
         if (isWebMode == false) {
-            InputStream storyMapDoc = getClass().getClassLoader().getResourceAsStream("story/test.html");
+            InputStream storyMapDoc = getClass().getClassLoader().getResourceAsStream("story/Offline Survival.html");
             java.util.Scanner storyMapStream = new java.util.Scanner(storyMapDoc).useDelimiter("\\A");
             String storyMapScanner = storyMapStream.next();
             String[] storyMapList = storyMapScanner.split("pid=\"");
@@ -47,9 +47,14 @@ public class PlayScreen extends World
                 storyMap.add(mapPassages(storyMapList[i]));
             }
         }
-
-        setScene(2);
         
+        
+        for (int i = 0; i < PlayScreen.mapLength; ++i) {
+            if (((String)PlayScreen.storyMap.get(i).get(1)).contains("Welcome")) {
+                setScene(Integer.valueOf((String)PlayScreen.storyMap.get(i).get(0)));
+                break;
+            }
+        }
         //System.out.println(storyMap.get(2).get(0));
 
         prepare();
@@ -91,10 +96,13 @@ public class PlayScreen extends World
             
             scene -= 1;
             currentRound = scene;
+
             currentScene = storyMap.get(currentRound);
-            
+
             createPrompts();
+
             Title.title = ((String)PlayScreen.storyMap.get(currentRound).get(1)).replace("\"","");
+
             Story.ChangeStory();
     }
     
@@ -107,7 +115,10 @@ public class PlayScreen extends World
         map.add(passage.split("position=")[1].split("size=")[0]);
         map.add(passage.split("size=")[1].split(">")[0]);
         map.add(passage.split("\">")[1].split("\\[\\[")[0].replace("&#39;","'"));
-        map.add("[[" + passage.split("\\[\\[", 2)[1].split("</tw-passagedata>")[0]);
+        try {
+            map.add("[[" + passage.split("\\[\\[", 2)[1].split("</tw-passagedata>")[0]);
+        } catch (Exception e) {}
+        
         return map;
     }
     
@@ -129,20 +140,28 @@ public class PlayScreen extends World
         Inventory food = new Inventory("inventory_food.png", -50);
         addObject(food,125,600);
         
+        Inventory matches = new Inventory("inventory_matches.png", 0);
+        addObject(matches,200,600);
+        
         Title title = new Title();
         addObject(title,140,45);
+        
+        
         
         createPrompts();
     }
     
     public void createPrompts()
     {
-        String[] prompts = String.valueOf(PlayScreen.currentScene.get(6)).split("\\]\\]");
-        
-        for (int i = 0; i <= prompts.length - 1; ++i) {
+        //try {
+            String[] prompts = String.valueOf(PlayScreen.currentScene.get(6)).split("\\]\\]");
+            
+            for (int i = 0; i <= prompts.length - 1; ++i) {
             if (prompts[i].contains("[")) {
-                addObject(new Prompt(prompts[i].replace("[", "")),200,400+i*50);
+                addObject(new Prompt(prompts[i].replace("[", "")),200,420+i*40);
             } 
         }
+        //} 
+        //catch (Exception IndexOutOfBoundsException) {}
    }
 }

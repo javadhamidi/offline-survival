@@ -8,7 +8,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class MainMenu extends World
 {
-    GreenfootSound music = new GreenfootSound("Marimba Boy.wav");
+    static GreenfootSound music = new GreenfootSound("Marimba Boy.wav");
 
     /**
      * Constructor for objects of class MainMenu.
@@ -44,7 +44,13 @@ public class MainMenu extends World
      */
     private void prepare()
     {
-        PlayButton playbutton = new PlayButton();
-        addObject(playbutton,200,440);
+        Button playButton = new Button("PlayButton");
+        addObject(playButton,200,440);
+        
+        Button volumeButton = new Button("VolumeButton");
+        addObject(volumeButton,50,600);
+        
+        Button infoButton = new Button("InfoButton");
+        addObject(infoButton,45,50);
     }
 }

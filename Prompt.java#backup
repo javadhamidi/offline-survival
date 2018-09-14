@@ -8,23 +8,29 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Prompt extends Actor
 {
-    private static String[] prompts;
-    private static String clickDestination;
+    private String prompt;
+    private String destination;
+    private int destinationPid;
     
-    void PromptPrepare(String prompt)
+    public Prompt(String promptDetails)
     {
-        prompts = prompt.split("\">")[1].split("\\[\\[")[1].split("</tw-passagedata>");
-        clickDestination = prompts[0].split("-&gt;")[1];
+        if (promptDetails.contains("-&gt;")) 
+        {
+            prompt = promptDetails.split("-&gt;")[0];
+            destination = promptDetails.split("-&gt;")[1];
         
-        GreenfootImage scr = new GreenfootImage(prompts[0],20,Color.BLUE,new Color(0,0,0,0));
-        setImage(scr);
+            for (int i = 0; i < PlayScreen.mapLength; ++i) {
+                if (((String)PlayScreen.storyMap.get(i).get(1)).replace("\"", "").contains(destination)) {
+                    destinationPid = Integer.valueOf((String)PlayScreen.storyMap.get(i).get(0));
+                    break;
+                }
+            }
+            
+            GreenfootImage scr = new GreenfootImage(prompt,20,Color.BLUE,new Color(0,0,0,0));
+            setImage(scr);
+        }
     }
-    
-    public Prompt()
-    {
-        PromptPrepare(storyMap[1]); 
-    }
-    
+
     /**
      * Act - do whatever the Prompt wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
@@ -32,7 +38,9 @@ public class Prompt extends Actor
     public void act() 
     {
         if (Greenfoot.mouseClicked(this)) {
-            //
+            //System.out.println(destinationPid);
+            ((PlayScreen)getWorld()).setScene(destinationPid);
+            Greenfoot.playSound("Mouse Click.wav");
         }
     }    
 }

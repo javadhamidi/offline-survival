@@ -29,6 +29,9 @@ public class Inventory extends Actor
     {
         if (Greenfoot.mousePressed(this)) 
         {
+            Notification notification = new Notification("pannel");
+            getWorld().addObject(notification,195,300);
+        
             ((PlayScreen)getWorld()).health.changeHealth(value);
             Greenfoot.playSound("Item Pickup.wav");
             getWorld().removeObject(this);

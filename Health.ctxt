@@ -5,4 +5,6 @@ comment1.params=
 comment1.target=Health()
 comment2.params=change
 comment2.target=void\ changeHealth(int)
-numComments=3
+comment3.params=
+comment3.target=void\ act()
+numComments=4
