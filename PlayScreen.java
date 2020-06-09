@@ -63,7 +63,7 @@ public class PlayScreen extends World
     private InputStream webMode()
     {
         try {
-            URL url = new URL("https://prhps.github.io/twine-repo/Offline%20Survival.html");
+            URL url = new URL("https://javadhamidi.github.io/offline-survival/twine.html");
     
             // Get the input stream through web connection
             URLConnection connection = url.openConnection();
